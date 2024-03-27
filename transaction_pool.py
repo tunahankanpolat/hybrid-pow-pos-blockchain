@@ -10,3 +10,9 @@ class TransactionPool:
 
     def clear(self):
         self.transactions = []
+        
+        
+    def to_dict(self):
+        return {
+            'transactions': self.transactions
+        }

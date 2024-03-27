@@ -18,3 +18,13 @@ class Wallet:
             vk = sk.get_verifying_key()
             return binascii.hexlify(vk.to_string()).decode('utf-8')
             
+def generate_private_key():
+      private_key = ecdsa.SigningKey.generate(curve=ecdsa.SECP256k1)
+      return binascii.hexlify(private_key.to_string()).decode('utf-8')
+def generate_public_key(private_key):
+      private_key_bytes = binascii.unhexlify(private_key)
+      sk = ecdsa.SigningKey.from_string(private_key_bytes, curve=ecdsa.SECP256k1)
+      vk = sk.get_verifying_key()
+      return binascii.hexlify(vk.to_string()).decode('utf-8')
+print(generate_private_key())
+print(generate_public_key(generate_private_key()))

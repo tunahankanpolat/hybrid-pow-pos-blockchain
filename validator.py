@@ -3,12 +3,15 @@ import binascii
 import random
 
 class Validator:
-      def __init__(self, private_key, port):
-        self.stake = random.randint(30, 100)
+      def __init__(self, private_key, port, stake = random.randint(30, 100)):
+        self.stake = stake
         self.public_key = self.generate_public_key(private_key)
         self.port = port
         self.vote = 0
         self.balance = 0  # Ödül için bir bakiye
+        
+      def to_dict(self):
+            return {'public_key': self.public_key, 'port': self.port, 'stake': self.stake, 'vote': self.vote, 'balance': self.balance}
 
       def generate_public_key(self, private_key):
             private_key_bytes = binascii.unhexlify(private_key)
